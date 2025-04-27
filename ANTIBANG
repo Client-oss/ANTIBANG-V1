@@ -1,0 +1,145 @@
+local Players       = game:GetService("Players")
+local UIS           = game:GetService("UserInputService")
+local RunService    = game:GetService("RunService")
+local TweenService  = game:GetService("TweenService")
+
+local player        = Players.LocalPlayer
+
+local ScreenGui         = Instance.new("ScreenGui")
+local MainFrame         = Instance.new("Frame")
+local Title             = Instance.new("TextLabel")
+local ToggleButton      = Instance.new("TextLabel")  
+local SpeedInput        = Instance.new("TextBox")
+local DirectionDropdown = Instance.new("TextButton")
+local CloseButton       = Instance.new("TextButton")
+local MinimizeButton    = Instance.new("TextButton")
+local FooterLabel       = Instance.new("TextLabel")
+local ProfileImage      = Instance.new("ImageLabel")
+local ProfileCorner     = Instance.new("UICorner")
+
+ScreenGui.Name   = "VR7_GUI"
+ScreenGui.Parent = game.CoreGui
+
+MainFrame.Name             = "MainFrame"
+MainFrame.Size             = UDim2.new(0, 300, 0, 300)
+MainFrame.Position         = UDim2.new(0.5, -150, 0.5, -150)
+MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MainFrame.BorderSizePixel  = 0
+MainFrame.Active           = true
+MainFrame.Draggable        = true
+MainFrame.Parent           = ScreenGui
+
+Title.Name               = "Title"
+Title.Size               = UDim2.new(1, 0, 0, 50)
+Title.Position           = UDim2.new(0, 0, 0, 0)
+Title.BackgroundColor3   = Color3.fromRGB(50, 50, 50)
+Title.Text               = "ANTIBANG V1"
+Title.TextColor3         = Color3.new(1,1,1)
+Title.Font               = Enum.Font.SourceSansBold
+Title.TextSize           = 24
+Title.Parent             = MainFrame
+
+local colors = {
+    Color3.fromRGB(255, 0, 0),
+    Color3.fromRGB(0, 255, 0),
+    Color3.fromRGB(0, 0, 255),
+}
+local colorIndex = 1
+
+spawn(function()
+    while true do
+        local nextColor = colors[colorIndex]
+        local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
+        TweenService:Create(Title, tweenInfo, {TextColor3 = nextColor}):Play()
+        colorIndex = colorIndex % #colors + 1
+        wait(1)
+    end
+end)
+
+ToggleButton.Name        = "StatusLabel"
+ToggleButton.Size        = UDim2.new(1, 0, 0, 20)
+ToggleButton.Position    = UDim2.new(0, 0, 0, 50)
+ToggleButton.BackgroundTransparency = 1
+ToggleButton.Text        = "Status: OFF"
+ToggleButton.TextColor3  = Color3.new(1,1,1)
+ToggleButton.Font        = Enum.Font.SourceSans
+ToggleButton.TextSize    = 16
+ToggleButton.TextXAlignment = Enum.TextXAlignment.Center
+ToggleButton.Parent      = MainFrame
+
+ProfileImage.Name        = "ProfileImage"
+ProfileImage.Size        = UDim2.new(0, 48, 0, 48)
+ProfileImage.Position    = UDim2.new(0, 5, 0, 75)
+ProfileImage.BackgroundTransparency = 1
+ProfileImage.Parent      = MainFrame
+ProfileCorner.CornerRadius = UDim.new(1, 0)
+ProfileCorner.Parent     = ProfileImage
+ProfileImage.Image       = "https://www.roblox.com/headshot-thumbnail/image?userId="..player.UserId.."&width=48&height=48&format=png"
+
+SpeedInput.Name          = "SpeedInput"
+SpeedInput.Size          = UDim2.new(0.8, 0, 0, 40)
+SpeedInput.Position      = UDim2.new(0.1, 0, 0, 130)
+SpeedInput.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+SpeedInput.Text          = "Speed: 50000000000"
+SpeedInput.TextColor3    = Color3.new(1,1,1)
+SpeedInput.Font          = Enum.Font.SourceSans
+SpeedInput.TextSize      = 18
+SpeedInput.Parent        = MainFrame
+
+DirectionDropdown.Name   = "DirectionDropdown"
+DirectionDropdown.Size   = UDim2.new(0.8, 0, 0, 40)
+DirectionDropdown.Position = UDim2.new(0.1, 0, 0, 180)
+DirectionDropdown.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+DirectionDropdown.Text   = "Direction: Right ➡️"
+DirectionDropdown.TextColor3 = Color3.new(1,1,1)
+DirectionDropdown.Font   = Enum.Font.SourceSans
+DirectionDropdown.TextSize = 20
+DirectionDropdown.Parent = MainFrame
+
+CloseButton.Name         = "CloseButton"
+CloseButton.Size         = UDim2.new(0, 30, 0, 30)
+CloseButton.Position     = UDim2.new(1, -35, 0, 5)
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+CloseButton.Text         = "X"
+CloseButton.TextColor3   = Color3.new(1,1,1)
+CloseButton.Font         = Enum.Font.SourceSansBold
+CloseButton.TextSize     = 20
+CloseButton.Parent       = MainFrame
+
+MinimizeButton.Name      = "MinimizeButton"
+MinimizeButton.Size      = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Position  = UDim2.new(1, -70, 0, 5)
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+MinimizeButton.Text      = "-"
+MinimizeButton.TextColor3 = Color3.new(0,0,0)
+MinimizeButton.Font      = Enum.Font.SourceSansBold
+MinimizeButton.TextSize  = 28
+MinimizeButton.Parent    = MainFrame
+
+FooterLabel.Name         = "FooterLabel"
+FooterLabel.Size         = UDim2.new(1, 0, 0, 20)
+FooterLabel.Position     = UDim2.new(0, 0, 1, -20)
+FooterLabel.BackgroundTransparency = 1
+FooterLabel.Text         = "© ASMR454511"
+FooterLabel.TextColor3   = Color3.new(1,1,1)
+FooterLabel.Font         = Enum.Font.SourceSans
+FooterLabel.TextSize     = 14
+FooterLabel.TextXAlignment = Enum.TextXAlignment.Center
+FooterLabel.Parent       = MainFrame
+
+local character   = player.Character or player.CharacterAdded:Wait()
+local humanoid    = character:WaitForChild("Humanoid")
+local root        = character:WaitForChild("HumanoidRootPart")
+
+local toggleKey   = Enum.KeyCode.X
+local showKey     = Enum.KeyCode.R
+local active      = false
+local speed       = 50000000000
+local extraBoosts = 50
+local direction   = Vector3.new(1, 0, 0)
+
+local minimized      = false
+local fullSize       = UDim2.new(0, 300, 0, 300)
+local collapsedSize  = UDim2.new(0, 300, 0, 50)
+
+local function
